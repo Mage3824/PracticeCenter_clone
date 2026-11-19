@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Ключ подписи JWT не хранится в репозитории (аудит 2.1): для локального запуска он
+         задаётся через dotnet user-secrets, например
+         dotnet user-secrets set "JwtSettings:SecretKey" "<ключ>". -->
+    <UserSecretsId>WorkTime.Api-Development</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WorkTime.Application\WorkTime.Application.csproj" />
+    <ProjectReference Include="..\WorkTime.Infrastructure\WorkTime.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <!--
+    Пакеты объявлены явно, чтобы их выбор был виден в исходном дереве. Версии подобраны под
+    net10.0: JwtBearer 10.0.15 — последний патч ветки 10.0.x, мажор совпадает с TFM;
+    Swashbuckle 11.0.1 — последняя стабильная, целевые TFM net10.0/net11.0.
+    Раньше комментарий говорил, что пакетов нет в локальном кеше и сборка требует сети;
+    после миграции на .NET 10 они резолвятся при restore без ошибок (проверено сборкой).
+  -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.15" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="11.0.1" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Версии подобраны под net10.0: Test.Sdk 18.12.0 и runner 4.0.1 (поддерживает xUnit v1/v2/v3),
+         xunit 2.9.3 — последняя стабильная ветка 2.x; coverlet 10.1.0. -->
+    <PackageReference Include="coverlet.collector" Version="10.1.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.12.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="4.0.1" />
+    <!-- Интеграционные тесты этапа 2: WebApplicationFactory поверх WorkTime.Api -->
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\WorkTime.Domain\WorkTime.Domain.csproj" />
+    <ProjectReference Include="..\..\src\WorkTime.Application\WorkTime.Application.csproj" />
+    <ProjectReference Include="..\..\src\WorkTime.Infrastructure\WorkTime.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\WorkTime.Api\WorkTime.Api.csproj" />
+  </ItemGroup>
+
+</Project>
